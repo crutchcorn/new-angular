@@ -1,4 +1,4 @@
-import {BaseComponent, Application} from './new-angular.js';
+import {BaseComponent, Application} from './new-angular/index.js';
 import {setTimeoutPatch} from './new-zonejs/patch-settimeout.js';
 import {queueMicrotaskPatch} from "./new-zonejs/patch-queue-microtask.js";
 import {addEventListenerPatch} from "./new-zonejs/patch-event-listener.js";
@@ -8,14 +8,11 @@ queueMicrotaskPatch();
 addEventListenerPatch();
 
 class MyComponent extends BaseComponent {
-    constructor() {
-        super("MyComponent");
-        this.count = 0;
-        this.updateCount = () => {
-            this.count++;
-        }
-        this.templateStr = `<button (click)="$updateCount">$count</button>`;
+    count = 0;
+    updateCount = () => {
+        this.count++;
     }
+    templateStr = `<button (click)="{{updateCount}}">The count is: {{count}}!</button>`;
 }
 
 const app = new Application();
