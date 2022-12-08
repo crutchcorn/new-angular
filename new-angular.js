@@ -34,6 +34,7 @@ class ChangeDetector {
 export class BaseComponent {
     constructor(name) {
         this.name = name;
+        this.template = () => compileToFunction(this.templateStr, this);
     }
 
     // A method that will be called when the component is initialized
@@ -81,8 +82,8 @@ export class Application {
 export function compileToFunction(templateStr, templateArgs) {
     const matchTemplateArgs = str => {
         if (str[0] === '$') {
-            const index = Number(str.slice(1));
-            return templateArgs[index - 1];
+            const key = str.slice(1);
+            return templateArgs[key];
         }
         return str;
     }

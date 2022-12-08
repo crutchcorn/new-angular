@@ -5,11 +5,12 @@ class MyComponent extends BaseComponent {
     constructor() {
         super("MyComponent");
         this.count = 0;
-        this.template = () => compileToFunction(`<button (click)="$1">$2</button>`, [() => {
+        this.updateCount = () => {
             setTimeout(() => {
                 this.count++;
             })
-        }, this.count]);
+        }
+        this.templateStr = `<button (click)="$updateCount">$count</button>`;
     }
 }
 
