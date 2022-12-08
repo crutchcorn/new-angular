@@ -79,7 +79,7 @@ export class Application {
 // This has a LOT of limitations, namely that it's bad
 // It only handles one element + child text
 // It only handles (eventName)="$1" and $1 is a templateArgs function syntax
-export function compileToFunction(templateStr, templateArgs) {
+function compileToFunction(templateStr, templateArgs) {
     const matchTemplateArgs = str => {
         if (str[0] === '$') {
             const key = str.slice(1);
