@@ -1,5 +1,5 @@
 import { Zone } from './new-zonejs/index.js';
-import {setTimeoutPatch} from './new-zonejs/patch-settimeout.js';
+import { setTimeoutPatch } from './new-zonejs/patch-settimeout.js';
 
 class Renderer {
     // Render the template of a component
@@ -10,10 +10,9 @@ class Renderer {
 }
 
 class ChangeDetector {
-    constructor(application) {
-        this.application = application;
-        this.zone = application.zone;
-        this.renderer = application.renderer;
+    constructor(zone, renderer) {
+        this.zone = zone;
+        this.renderer = renderer;
     }
 
     // Detect changes in the components in the application
@@ -48,11 +47,9 @@ export class Application {
     constructor() {
         this.zone = new Zone();
         this.renderer = new Renderer();
-        this.changeDetector = new ChangeDetector(this);
+        this.changeDetector = new ChangeDetector(this.zone, this.renderer);
 
-        setTimeoutPatch(() => {
-            this.changeDetector.detectChanges();
-        })
+        this.zone.add({ task: () => this.tick() });
     }
 
     // Create a new component and add it to the zone
@@ -71,6 +68,6 @@ export class Application {
 
     // Run the detectChanges method of the ChangeDetector at regular intervals
     tick() {
-        setTimeout(() => { })
+        this.changeDetector.detectChanges();
     }
 }

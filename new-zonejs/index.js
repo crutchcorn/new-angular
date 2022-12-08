@@ -10,8 +10,11 @@ class Zone {
 
     // Run all the tasks in the zone
     run() {
+        currentZone = this;
         this.tasks.forEach(task => task.task());
     }
 }
 
-export {Zone};
+var currentZone = new Zone();
+
+export {Zone, currentZone};

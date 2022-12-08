@@ -1,4 +1,6 @@
-export const setTimeoutPatch = (fn) => {
+import {currentZone} from './index.js';
+
+export const setTimeoutPatch = () => {
     const originalSetTimeout = setTimeout;
 
     setTimeout = (callback, delay, ...args) => {
@@ -6,7 +8,7 @@ export const setTimeoutPatch = (fn) => {
 
         return originalSetTimeout(() => {
             callback.apply(context, args);
-            fn();
+            currentZone.run();
         }, delay);
     };
 };
