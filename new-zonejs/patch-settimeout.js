@@ -1,4 +1,4 @@
-import {currentZone} from './index.js';
+import { currentZone } from './index.js';
 
 export const setTimeoutPatch = () => {
     const originalSetTimeout = setTimeout;
