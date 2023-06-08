@@ -8,6 +8,9 @@ queueMicrotaskPatch();
 addEventListenerPatch();
 
 class MyComponent extends BaseComponent {
+    constructor() {
+        super("MyComponent");
+    }
     count = 0;
     updateCount = () => {
         this.count++;

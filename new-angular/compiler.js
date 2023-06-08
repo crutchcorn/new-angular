@@ -3,7 +3,6 @@
 // It only handles (eventName)="$1" and $1 is a templateArgs function syntax
 export function compileToFunction(templateStr, templateArgs) {
     const matchTemplateArgs = str => {
-        console.log(str)
         if (str.startsWith('{{') && str.endsWith('}}')) {
             const key = str.slice(2, str.length - 2);
             return templateArgs[key];
